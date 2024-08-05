@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a23722ce6f33d4144addc21c8b6615fc
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - pianoClip: {fileID: 8300000, guid: 1d9eb34054db5ef46a1814e90e5ee986, type: 3}
+  - elecClip: {fileID: 8300000, guid: 9b2844148e483e3419a97bca8dc39153, type: 3}
+  - bassClip: {fileID: 8300000, guid: d160866ee7b09144a93114d2e4ff4d7b, type: 3}
+  - drumClip: {fileID: 8300000, guid: f0a4c5011a322ee46b15721cc6e55356, type: 3}
+  - camerax: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
