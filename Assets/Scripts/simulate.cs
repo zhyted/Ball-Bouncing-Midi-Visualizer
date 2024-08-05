@@ -29,19 +29,19 @@ public class simulate : MonoBehaviour
         {"initialX", 0f},
         {"initialY", 0f},
         
-        //The consistency and quality of the generation drops with higher values, Recommended values: (Slow- best gen: 1-4x, Fast- good gen: 5-9x, Very Fast- inconsistent gen: 10-15x, Superspeed- bad gen: 16-24x)
-        //(8x is best for speed to generation ratio imo)
+        //The consistency and quality of the generation drops with higher values depending on how good your setup is,
+        //(6-9x is best for speed to generation ratio on mine)
         {"simSpeed", 8f},
         
         //physics settings {
-            {"XVelocity", 0.05f},
+            {"XVelocity", 0.053f},
             {"YVelocity", -0.2f},
-            {"gravity", 0.0014f},
-            {"bounceMulti", 0.9f},
-            {"YVelocityClamp", 0.18f},
+            {"gravity", 0.002f},
+            {"bounceMulti", 0.6f},
+            {"YVelocityClamp", 0.25f},
         
             //the number of times the physics are enacted every second, set higher for x and y movement to increase this many times every second;
-            {"physicsFps", 180f},
+            {"physicsFps", 160f},
         // }
 
         //half of player object scale {
@@ -58,6 +58,7 @@ public class simulate : MonoBehaviour
 
 
     // (Danger Zone) Don't touch unless you know what you're doing {
+    ///////////////////////////////////////////////////////////////
     private float TPQ;
     private bool ready = false;
     private float curX;
@@ -65,11 +66,11 @@ public class simulate : MonoBehaviour
     private float globalTime = 0f;
     private float timer = 0f;
     private float frametime;
-    private int startPlatformTeleport = 8;
+    private int startPlatformTeleport = 15;
     private GameObject playerStartTeleport;
     public TextMeshProUGUI generationText;
     private int generationsLeft = 0;
-
+    //
     float bpm;
     string songPath;
     float initialX;
@@ -84,18 +85,16 @@ public class simulate : MonoBehaviour
     float collisionSize;
     //
     //
-        public int interpolationFramesCount = 60; 
-        int elapsedFrames = 0;
-        GameObject cameraGoalObject;
-    //
-    //
-    // } (Danger Zone) END
-
+    public int interpolationFramesCount = 60; 
+    int elapsedFrames = 0;
+    GameObject cameraGoalObject;
     Playerscript playerScript;
-
-
     public GameObject platformObject;
     public GameObject playerObject;
+    //
+    ////////////////////////////////////////////////////////////////
+    // } (Danger Zone) END
+
 
 
     //midi data dictionary definition
@@ -185,7 +184,7 @@ public class simulate : MonoBehaviour
             if (simYVelocity > YVelocityClamp) simYVelocity = YVelocityClamp;
             if (simYVelocity < -YVelocityClamp) simYVelocity = -YVelocityClamp;
 
-            curY += simYVelocity * timerMulti;
+            curY += simYVelocity;
 
             timer -= (frametime * timerMulti);
         }
@@ -233,7 +232,7 @@ public class simulate : MonoBehaviour
 
         float activateTime = timesToActivate[index];
 
-        float Intensity = 0.3f;
+        float Intensity = 0.345f;
 
         var dict = parsedData[activateTime];
 
@@ -250,7 +249,7 @@ public class simulate : MonoBehaviour
             ySet = (curY + collisionSize + 0.04f); 
         };
 
-        var platform = Instantiate(platformObject, new Vector2(curX+0.015f, ySet), Quaternion.identity);
+        var platform = Instantiate(platformObject, new Vector2(curX+0.011f, ySet), Quaternion.identity);
 
         float calculation = (-simYVelocity) * (bounceMulti + ((1 - bounceMulti) * Intensity));
 

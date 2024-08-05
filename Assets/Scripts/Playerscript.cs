@@ -45,7 +45,7 @@ public class Playerscript : MonoBehaviour
 
             var prevpos = gameObject.transform.position;
 
-            gameObject.transform.position = new Vector2(prevpos.x + (XVelocity * timerMulti), prevpos.y + (YVelocity * timerMulti));
+            gameObject.transform.position = new Vector2(prevpos.x + (XVelocity * timerMulti), prevpos.y + (YVelocity));
 
             timer -= (frametime * timerMulti);
         }
@@ -99,7 +99,7 @@ public class Playerscript : MonoBehaviour
             audio.pitch = 1 * (float)Math.Pow(1.05946, pitch);
 
             audio.Play();
-            StartCoroutine(ObjectDestroyer(audio, 1.3f));
+            StartCoroutine(ObjectDestroyer(audio, 1.2f));
         }
     }
 
@@ -119,8 +119,6 @@ public class Playerscript : MonoBehaviour
                 cSize.y += playerSize;
 
                 AudioHandler(notesDict);
-
-                
 
                 float calculation = pScript.savedCalc;
 
@@ -151,7 +149,7 @@ public class Playerscript : MonoBehaviour
 
         frametime = 1000 / physicsfps;
 
-        var playerLocation = (Vector2)gameObject.transform.position + new Vector2(0, 0.1f);
+        var playerLocation = (Vector2)gameObject.transform.position + new Vector2(0, 0.04f);
         camerax.transform.position = new Vector3(playerLocation.x+1.5f, playerLocation.y-1, -10);
 
         camerax.GetComponent<CameraScript>().PlayerFollowStart(gameObject);
